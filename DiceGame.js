@@ -25,62 +25,54 @@ try {
                      + 'to have, and then guessing numbers that would be '
                      + 'located on the die until you get the right answer');
 
-  // Accepts user input in str form
-  rl.question('Enter number of sides: ', (numberofsidesstr) => {
-    // Turns number of sides into an int value
-    var numberofsides = parseInt (numberofsidesstr, 10);
+  // Accepts user input
+  rl.question('Enter number of sides: ', (numberofsides) => {
 
     // Checks to see if a realistic number of sides has been chosen
     if (numberofsides < 1) {
       console.log('Invalid number of sides please pick real numbers.');
       return;
-    }
-    
-    // Generates random number
-    var randomint = (Math.ceil(Math.random() * numberofsides));
-    var guesses = 0;
- 
-    // Process (Loop)
-    function loop() {
+          
+    // If a proper integer has been chosen:
+    } else {
+  
+      // Generates random number
+      var randomint = (Math.ceil(Math.random() * numberofsides));
+  
+      // Displays random integer (for debugging) usually commented out
+      //console.log(randomint);
+  
+      // Defines guess counter
+      var guesses = 0;
       
-      // Gets user input as a string
-      rl.question('Guess a number between 1 and ' + numberofsides + ': ',
-                  function saveInput(guessStr) {
-        console.log();
-
-        // Converts guess from a string to an integer
-        var guessednum = parseInt(guessStr, 10);
-
-        // Increases guess count and prints guess number
-        guesses = guesses + 1;
-        console.log('Guesses: ' + guesses);
-        
-        // Checks to see if input is valid
-        if (isNaN(guessednum) == true) {
-          console.log("Please input proper values.");
-          rl.close();
-
-          //Checks if user inputted number = random int
-          } else if (guessednum == randomint) {
-            // Outputs answer when user guesses correctly
-            console.log ('You guessed correctly! The answer was: ' 
-                         + randomint + '. It took you: ' + guesses
-                         + ' guesses');
-            rl.close();
-
-          // If both other cases are untrue, do this instead
-          } else {
-            // Continues program if guess is wrong
-            console.log("Wrong number, try again!");
+      // Beginning of guessing loop
+      while (true) {
+  
+        // Recieves user input
+        rl.question('Guess a number between 1 and' + numberofsides), (guessednum) => {
+  
+          // Counts and prints amount of guesses
+          guesses = guesses + 1;
+          console.log('Guesses: ' + guesses);
+    
+          // Determines if guessed number is equivalent to random number
+          if (guessednum == randomint) {
             console.log();
-            loop();
-        }
-      });
-      return;
+            console.log('You guessed correctly! The answer was: ' 
+                        + randomint + '. it took you: ' + guesses
+                        + ' guesses');
+            return; // Ends loop if user guesses correctly
+          } else {
+            console.log();
+            console.log('Wrong guess. Try again.');
+          }
+        };
+      }
     }
-    loop();
   });
-  // Catches invalid values.
-} catch (err) {
-  console.log("Invalid input");
+// Catches invalid inputs
+} catch(err) {
+console.log();
+console.log();
+console.log('Invalid input. Please try again');
 }
