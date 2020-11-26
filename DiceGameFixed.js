@@ -21,9 +21,9 @@ const rl = readline.createInterface({
 try {
   // Explains game to user
   console.log('This is the Dicegame program. You play by first '
-                     + 'entering the number of sides you wish the die '
-                     + 'to have, and then guessing numbers that would be '
-                     + 'located on the die until you get the right answer');
+               + 'entering the number of sides you wish the die '
+               + 'to have, and then guessing numbers that would be '
+               + 'located on the die until you get the right answer');
 
   // Accepts user input in str form
   rl.question('Enter number of sides: ', (numberofsidesstr) => {
